@@ -39,5 +39,3 @@ class Bullet(object):
 
     def move(self, direction=1):
         self.y += self.speed * direction
-
-class EnemyShip(Ship)
