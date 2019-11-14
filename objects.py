@@ -16,12 +16,11 @@ class Ship(object):
         ship_rect = self.ship_surface.get_rect(x=self.x, y=self.y)
         surface.blit(self.ship_surface, ship_rect)
 
-    def move(self, surface, direction=1):
+    def move(self, direction=1):
         self.x += self.ship_speed * direction
-        if self.x+self.width >= surface.get_width():
-            self.x = surface.get_width() - self.width
-        if self.x <= 0:
-            self.x = 0
+
+    def move_down(self):
+        self.y += self.ship_speed
 
     def in_surface(self, surface):
         pass
