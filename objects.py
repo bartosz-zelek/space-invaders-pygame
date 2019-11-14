@@ -23,6 +23,9 @@ class Ship(object):
         if self.x <= 0:
             self.x = 0
 
+    def in_surface(self, surface):
+        pass
+
 
 class Bullet(object):
     def __init__(self, x, y, width, height, speed, image):
