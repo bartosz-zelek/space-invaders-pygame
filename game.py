@@ -60,31 +60,33 @@ while run:
         bullet.move(-1)
         bullet.draw(window)
 
-    for enemies_col in ship_enemies:
-        for ship_enemy in enemies_col:
-            if enemy_move_time/250 >= 1:
-                ship_enemy.move(enemy_direction)
-
-            if ship_enemy.x+ship_enemy.width >= screen_width:
-                enemy_direction = -1
-                enemies_go_down = True
-            elif ship_enemy.x <= 0:
-                enemy_direction = 1
-                enemies_go_down = True
-            ship_enemy.draw(window)
     if enemies_go_down:
+        enemies_go_down = False
+        enemies_went_down = []
         for enemies_col in ship_enemies:
             for ship_enemy in enemies_col:
                 if ship_enemy not in enemies_went_down:
                     ship_enemy.move_down()
                     enemies_went_down.append(ship_enemy)
-    else:
-        enemies_went_down = []
+
+    for enemies_col in ship_enemies:
+        for ship_enemy in enemies_col:
+            if ship_enemy.x+ship_enemy.width >= screen_width:
+                enemy_direction = -1
+                ship_enemy.x -= 5
+                enemies_go_down = True
+            elif ship_enemy.x <= 0:
+                enemy_direction = 1
+                ship_enemy.x += 5
+                enemies_go_down = True
+            ship_enemy.draw(window)
+
+            if enemy_move_time/250 >= 1:
+                ship_enemy.move(enemy_direction)
 
     if enemy_move_time/250 >= 1:
         enemy_move_time = 0
         
-    enemies_go_down = False
     pygame.display.update()
 
 pygame.quit()
